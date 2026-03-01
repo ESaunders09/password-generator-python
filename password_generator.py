@@ -10,17 +10,17 @@ all_chars = letters + numbers + symbols # Combine everything
 # Use validation to check for invalid inputs
 while True:
     # Ask the user for the number of passwords they want
-    numPasswords = input("How many passwords do you want? ")
+    num_passwords = input("How many passwords do you want? ")
     try:
-        numPasswords = int(numPasswords)
-        if numPasswords <= 0:
+        num_passwords = int(num_passwords)
+        if num_passwords <= 0:
             print("Invalid input, must be greater than 0.")
         else:
             break
     except ValueError:
         print("Invalid input, not a valid number.")
 
-for _ in range(numPasswords):
+for p_num in range(num_passwords):
     password = ""
     # Use validation to check for invalid inputs
     while True:
@@ -41,6 +41,10 @@ for _ in range(numPasswords):
     # Generate the random password
     for _ in range(length):
         password += random.choice(all_chars)
-    print("Your password is:", password)
-    pyperclip.copy(password)
-    print("Password copied to clipboard!")
+    print("Your password #" + str((p_num+1)), "is:", password)
+    copy_check = input("Would you like to copy this password to clipboard? (y/n) ")
+    if copy_check.upper() == "Y":
+        pyperclip.copy(password)
+        print("Password copied to clipboard!")
+    else:
+        print("Password not copied.")
